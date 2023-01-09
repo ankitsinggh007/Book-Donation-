@@ -1,13 +1,16 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import classes from "./Home.module.css"
 import BCA from "../Media/BCA.png"
 import BBA from "../Media/BBA.jpg"
 import BCOM from "../Media/BCOM.webp"
+import { User } from '../App'
 function Home() {
+const {LoggedInUserData, setLoggedInUserData,createUser}=useContext(User);
+
     return (
         <div className={classes.Main}>
-            <span className={classes.Welcome}>hi, name today which book you want to donate,make sure you store book in correct option as given below</span>
-            {/* <span className={classes.Welcome}>hi, name wich book you wnat to read you can chose from any of these option</span> */}
+           {LoggedInUserData.Role==="Donor" &&<span className={classes.Welcome}>{`hi,${LoggedInUserData.firstName}  today which book you want to donate,make sure you store book in correct option as given below`}</span>}
+            {LoggedInUserData.Role!=="Donor" &&<span className={classes.Welcome}>{`hi, ${name} which book you want to read you can choose from any of these options`}</span> }
             <div className={classes.Course}>
                 <div className={classes.Card}>
                     <div class="card" className={classes.Body}>

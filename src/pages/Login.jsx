@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
+import { NavLink } from "react-router-dom";
+import { Alert } from 'reactstrap';
+import { User } from '../App';
 import {
   MDBRow,
   MDBCol,
@@ -15,50 +18,83 @@ import {
 import classes from "./Login.module.css";
 import LoginBanner from "../Media/LoginBanner.svg"
 export default function App() {
-    const [loginRegisterActive , setloginRegisterActive ] = useState("login")
-    const handleLoginRegisterClick=()=>{
+  const [loginRegisterActive, setloginRegisterActive] = useState("login")
+  const [showPassword, setShowPassword] = useState(false)
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const { Creadential, setCreadential, createUser, verifyCredential } = useContext(User);
+  const [Message, setMessage] = useState("")
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+    if (Creadential.email !== "") {
+      if (regex.test(Creadential.email)) {
+        if (Creadential.Password !== "") {
+            verifyCredential();
+        
+        }
+        else {
+          setMessage("fill password");
+        }
+      } else {
+        setMessage("fill valid email");
+      }
 
     }
+    else {
+      setMessage("fill email");
+    }
+  };
+
+
   return (
     <div className={classes.Container}>
-    <div className={classes.Box}>
-      <MDBTabs  pills justify className={'mb-3'}>
-        <MDBTabsItem>
-          <MDBTabsLink
-            active={true}
-          >
-            Login
-          </MDBTabsLink>
-        </MDBTabsItem>
-       
-      </MDBTabs>
+      <div className={classes.Box}>
+        <MDBTabs pills justify className={'mb-3'}>
+          <MDBTabsItem>
+            <MDBTabsLink
+              active={true}
+            >
+              Login
+            </MDBTabsLink>
+          </MDBTabsItem>
 
-      <MDBTabsContent >
-        <MDBTabsPane show={loginRegisterActive === 'login'}>
-          <form >
-            <MDBInput className='mb-4' type='email' id='form7Example1' label='Email address' />
-            <MDBInput className='mb-4' type='password' id='form7Example2' label='Password' />
+        </MDBTabs>
+
+        <MDBTabsContent >
+          <MDBTabsPane show={loginRegisterActive === 'login'}>
+            <form onSubmit={handleSubmit} >
+          {Message.length != 0 && <Alert color="danger">
+                        {Message}
+                    </Alert>}
+              <MDBInput className='mb-4' type='email' id='form7Example1' 
+              onChange={(e)=>{setCreadential({...Creadential,email:e.target.value})}}
+              label='Email address' />
+              <MDBInput className='mb-4' type='password' id='form7Example2' 
+              onChange={(e)=>{setCreadential({...Creadential,Password:e.target.value})}}
+              label='Password' />
 
 
-            <MDBBtn type='submit' className='mb-4' block>
-              Sign in
-            </MDBBtn>
+              <MDBBtn type='submit' className='mb-4' block>
+                Log In
+              </MDBBtn>
 
-            <div className='text-center'>
-              <p>
-                Not a member? <a href='#!'>Register</a>
-              </p>
-            </div>
-          </form>
-        </MDBTabsPane>
-        
-      </MDBTabsContent>
-    </div>
-    <div className={classes.Image}>
-        <img src={LoginBanner} width="100%"/>
-        
+              <div className='text-center'>
+                <p>
+                  Not a member? <NavLink to="/signup">Register</NavLink>
+                </p>
+              </div>
+            </form>
+          </MDBTabsPane>
 
-    </div>
+        </MDBTabsContent>
+      </div>
+      <div className={classes.Image}>
+        <img src={LoginBanner} width="100%" />
+
+
+      </div>
     </div>
   );
 }

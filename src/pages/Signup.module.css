@@ -1,22 +1,23 @@
-.Box{
+.Box {
     width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 30px;
-    height:90vh;
+    height: 90vh;
     border-radius: 10px;
 
 }
-.Container{
-    display: flex;
-height: auto;
-padding: 10px;
 
-border: 1px solid black;
+.Container {
+    display: flex;
+    height: auto;
+    padding: 10px;
+
 
 
 }
-.Image{
+
+.Image {
     width: 60%;
 }

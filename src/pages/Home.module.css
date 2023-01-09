@@ -1,38 +1,43 @@
-.Main{
-    border: 1px solid black;
-    height:100vh;
-    padding:30px;
+.Main {
+    height: 100vh;
+    padding: 30px;
 }
-.Course{
-margin-top: 50px;
-display: flex;
-border: 1px solid black;
-width:93vw;
+
+.Course {
+    margin-top: 50px;
+    display: flex;
+    width: 93vw;
 }
-.Welcome{
+
+.Welcome {
     font-size: 2rem;
     font-weight: 500;
-}.Body{
-    border:1px solid black;
+}
+
+.Body {
     width: 50%;
     height: 100%;
     line-height: 25px;
-}
-.Body img {
     border: 1px solid black;
-    width:196px;
-    height:120px
+    border-radius: 5px;
+}
+
+.Body img {
+    width: 196px;
+    height: 120px;
 
 }
-.Card{
+
+.Card {
     /* border */
 }
-.Button{
+
+.Button {
     padding: 10px;
-    padding-left:14px ;
-    padding-right:14px ;
-    color:white;
-    background-color:#3B71CA ;
+    padding-left: 14px;
+    padding-right: 14px;
+    color: white;
+    background-color: #3B71CA;
     height: 20px;
     font-size: 1.2rem;
     border-radius: 4px;
